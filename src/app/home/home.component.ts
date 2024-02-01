@@ -3,6 +3,8 @@ import { Router, RouterModule } from '@angular/router';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { WebApiService } from '../service/web-api.service';
 import { CommonModule } from '@angular/common';
+import { SearchFilterPipe } from '../pipe/search-filter.pipe';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'ng-modal-confirm',
@@ -34,7 +36,7 @@ const MODALS: { [name: string]: Type<any> } = {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, FormsModule, SearchFilterPipe],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
@@ -42,6 +44,9 @@ export class HomeComponent implements OnInit {
 
   closeResult = '';
   userList: any = [];
+
+  searchText: any = "";
+
   constructor(private router: Router, private modalService: NgbModal, private webApiService: WebApiService) { }
 
   ngOnInit(): void {
